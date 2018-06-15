@@ -29,12 +29,14 @@ def get_xml_info(path):
 if __name__ == '__main__':
     print('???')
 
+#####################################################################
 import json
 def get_json(filename):
     with open(filename, 'r') as load_f:
         load_dict = json.load(load_f)
         print(load_dict)
         print(len(load_dict))
+        print(load_dict[3][2])
     # load_dict['smallberg'] = [8200, {1: [['Python', 81], ['shirt', 300]]}]
     # print(load_dict)
 
@@ -44,6 +46,14 @@ def findfile():
         if file[-5:] == '.json':
             print(file)
             get_json(file)
+
+#####################################################################
+import csv
+with open('stocks.csv') as f:
+    f_csv = csv.reader(f)
+    headers = next(f_csv)
+    for row in f_csv:
+        print(row)
 
 if __name__ == '__main__':
     findfile()
