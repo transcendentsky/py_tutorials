@@ -49,11 +49,12 @@ def findfile():
 
 #####################################################################
 import csv
-with open('stocks.csv') as f:
+with open('run_nomix_cifar100_mute_with_xavier_logs-tag-Test_1001_val_acc.csv') as f:
     f_csv = csv.reader(f)
     headers = next(f_csv)
+    # print(headers)
     for row in f_csv:
         print(row)
 
-if __name__ == '__main__':
-    findfile()
+# if __name__ == '__main__':
+#     findfile()
