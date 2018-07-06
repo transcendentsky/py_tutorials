@@ -1,4 +1,4 @@
-#coding:utf-8
+# coding:utf-8
 
 """
 def plt_bboxes(img, rclasses, rscores, rbboxes, \
@@ -42,21 +42,30 @@ def plt_bboxes(img, rclasses, rscores, rbboxes, \
 import matplotlib.pyplot as plt
 import numpy as np
 
-def plt_tables(times, epochs, data):
 
+def plt_tables(times, epochs, data):
     print("plt show")
     fig = plt.figure(figsize=None)
 
 
 def show_plot(times, epochs, data):
     # 折线图 Or Scatter
-    plt.figure(figsize=(8,5))
-    plt.plot(epochs, data, marker='ro')
+    plt.figure(figsize=(8, 5))
+    """
+    args:
+    marker='o' ,'x',
+    color=
+    """
+
+    plt.plot(epochs, data[:, 0], color='red', label='0')
+    plt.plot(epochs, data[:, 1], color='green', marker='x', label='1')
+    plt.legend()  # 显示图例
     plt.grid(True)
     plt.xlabel('epochs')
     plt.ylabel('data')
     plt.title('Test')
     plt.show()
+
 
 def show_scatter(times, epochs, data):
     # scatter
@@ -65,7 +74,7 @@ def show_scatter(times, epochs, data):
     # plt.scatter(epochs, data, 'o')
 
     # 3-dimensions #
-    c = np.random.randint(0,10,100)
+    c = np.random.randint(0, 10, 100)
     plt.scatter(epochs, data, c=c, marker='o')
     plt.colorbar()
 
@@ -75,12 +84,13 @@ def show_scatter(times, epochs, data):
     plt.title('Scatter Plot')
     plt.show()
 
+
 def show_hist(times, epochs, data):
     # histogram
     plt.figure(figsize=(8, 5))
     # ValueError: `bins` must increase monotonically, when an array
     # plt.hist(data, epochs,label=['1st', '2nd'])
-    plt.hist(data, 100,label=['1st'])
+    plt.hist(data, 100, label=['1st'])
     plt.grid(True)
     plt.legend(loc=0)
     # 表示最佳位置显示图例
@@ -101,16 +111,15 @@ def others():
     plt.setp(ax, xticklabels=['1st', '2nd']) 表示刻度值标签设置为'1st' 和 '2nd'
     '''
 
-
-
     pass
 
 
 if __name__ == '__main__':
     epochs = np.array(range(100))
     # epochs = np.random.rand(100)
-    data = np.random.rand(100)
+    # data = np.random.rand(100)
+    data = np.random.rand(200).reshape((100, 2))
 
-    # show_plot(None, epochs, data)
+    show_plot(None, epochs, data)
     # show_scatter(None, epochs, data)
-    show_hist(None, epochs, data)
+    # show_hist(None, epochs, data)
