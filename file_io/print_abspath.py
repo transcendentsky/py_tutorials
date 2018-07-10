@@ -14,9 +14,11 @@
 import os
 from .tt import print_dir
 
-print_dir.test()
-s = os.path.abspath('.')
-print(s)
 def test():
     print_dir.test()
+
+if __name__ == '__main__':
+    print_dir.test()
+    s = os.path.abspath('.')
+    print("file_io.print abspath",s)
 

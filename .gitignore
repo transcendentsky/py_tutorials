@@ -1,4 +1,7 @@
 .idea
 *pyc
 results
+*.tar.gz
+*.gz
+*.tgz
 ptb
