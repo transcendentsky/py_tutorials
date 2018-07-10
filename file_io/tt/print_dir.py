@@ -1,9 +1,9 @@
 import os
 
 a = os.path.abspath('.')
-print(a)
-print('################')
+print("[print_dir.py] {}".format(a))
+print('[print_dir.py] ################')
 
 def test():
     s = os.path.abspath('.')
-    print(s)
+    print("[print_dir.py] {}".format(a))

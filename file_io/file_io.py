@@ -1,4 +1,4 @@
-#coding:utf-8
+# coding:utf-8
 """
 r	以只读方式打开文件。文件的指针将会放在文件的开头。这是默认模式。
 
@@ -25,6 +25,7 @@ a+	打开一个文件用于读写。如果该文件已存在，文件指针将�
 ab+	以二进制格式打开一个文件用于追加。如果该文件已存在，文件指针将会放在文件的结尾。
      如果该文件不存在，创建新文件用于读写。
 """
+from __future__ import print_function
 import os
 import sys
 
@@ -46,30 +47,30 @@ def find_previous(run):
     return epoches, resume_checkpoints
 """
 if not os.path.exists('checkpoint_list.txt'):
-    pass
+  pass
 
 with open('checkpoint_list.txt', 'r') as f:
-    abspath = os.path.abspath('.')
-    print(abspath)
-    linelist = f.readlines()
+  abspath = os.path.abspath('.')
+  print(abspath)
+  linelist = f.readlines()
 epoches, resume_checkpoints = list(), list()
 for line in linelist:
-    epoch = int(line[line.find('epoch ') + len('epoch ') : line.find(':')])
-    checkpoint = line[line.find(':') + 2:-1]
-    epoches.append(epoch)
-    resume_checkpoints.append(checkpoint)
+  epoch = int(line[line.find('epoch ') + len('epoch '): line.find(':')])
+  checkpoint = line[line.find(':') + 2:-1]
+  epoches.append(epoch)
+  resume_checkpoints.append(checkpoint)
 # return epoches, resume_checkpoints
 
 
 with open('checkpoint_list.txt', 'r') as f:
-    abspath = os.path.abspath('.')
-    print(abspath)
-    lines = f.readlines()
-    for line in lines:
-        line = line.strip('\n') # 去除末尾的 回车
-        mark = line.find('!')
-        print(mark<0)
-        print(line, end=' 2333 \n', file=sys.stderr)
+  abspath = os.path.abspath('.')
+  print(abspath)
+  lines = f.readlines()
+  for line in lines:
+    line = line.strip('\n')  # 去除末尾的 回车
+    mark = line.find('!')
+    print(mark < 0)
+    print(line, end=' 2333 \n', file=sys.stderr)
 
 ################################################
 ##  介绍一下标准输出
@@ -77,10 +78,9 @@ with open('checkpoint_list.txt', 'r') as f:
 
 ##  当文件为空时，返回空集
 with open('Nothing.py', 'r') as f:
-    lines = f.readlines()
-    print(lines == None)
-    print(lines)
-
+  lines = f.readlines()
+  print(lines == None)
+  print(lines)
 
 # split 的返回测试
 sss = 'python tt.py'
