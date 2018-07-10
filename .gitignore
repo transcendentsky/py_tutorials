@@ -5,3 +5,7 @@ results
 *.gz
 *.tgz
 ptb
+*.zip
+*.doc
+*.docx
+
