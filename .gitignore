@@ -8,4 +8,6 @@ ptb
 *.zip
 *.doc
 *.docx
-
+*.o
+*checkpoint*
+tf_new_tutorials/tf_logs/

@@ -1,0 +1,9 @@
+setup.py
+pkgtest/__init__.py
+pkgtest/print1.py
+pkgtest/print2.py
+pkgtest.egg-info/PKG-INFO
+pkgtest.egg-info/SOURCES.txt
+pkgtest.egg-info/dependency_links.txt
+pkgtest.egg-info/requires.txt
+pkgtest.egg-info/top_level.txt

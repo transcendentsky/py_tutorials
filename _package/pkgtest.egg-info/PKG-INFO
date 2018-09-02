@@ -1,0 +1,12 @@
+Metadata-Version: 1.2
+Name: pkgtest
+Version: 1.0.0
+Summary: A print test for PyPI
+Home-page: https://www.python.org/
+Author: winycg
+Author-email: win@163.com
+License: MIT
+Description: UNKNOWN
+Keywords: ga nn
+Platform: UNKNOWN
+Requires-Python: >=3

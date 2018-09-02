@@ -26,10 +26,10 @@ class TaskRunning(threading.Thread):
             self.check_process()
             if self.task_q.qsize() > 0:
                 # if self.process_q.qsize() < self.max_process:
-                    # task_command = self.task_q.get()
-                    # obj = subprocess.Popen([task_command], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-                    # obj = subprocess.Popen([task_command])
-                    # self.process_q.put(obj)
+                # task_command = self.task_q.get()
+                # obj = subprocess.Popen([task_command], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                # obj = subprocess.Popen([task_command])
+                # self.process_q.put(obj)
                 print("ooooooo")
             print("[!] ooooooo")
 
@@ -44,6 +44,7 @@ class TaskRunning(threading.Thread):
 
     def join(self):
         self.running = 0
+        print("tr joined, and restart")
         super(TaskRunning, self).join()
 
 q = queue.LifoQueue(maxsize=10)
@@ -51,7 +52,6 @@ tr = TaskRunning(q)
 tr.start()
 time.sleep(3)
 tr.join()
-print("tr joined, and restart")
 # 并不能再启动
 tr.start()   # RuntimeError: threads can only be started once
 print("?")

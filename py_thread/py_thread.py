@@ -6,6 +6,7 @@ import os
 import subprocess
 try:
     import thread
+    print(sys.version)
 except:
     import _thread as thread
 import time
@@ -20,6 +21,6 @@ def printwocao(o=None):
 
 thread.start_new_thread(printwocao,())
 
-# 这个十分重要， 当进程结束时，子线程也会结束
+# 这个十分重要， 当主进程结束时，子线程也会结束
 while 1:
     pass

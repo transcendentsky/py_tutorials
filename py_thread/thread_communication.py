@@ -18,7 +18,7 @@ def consumer(in_q):
         data = in_q.get()
         print(data)
         # Process the data
-        ...
+
 
 # Create the shared queue and launch both threads
 q = Queue()

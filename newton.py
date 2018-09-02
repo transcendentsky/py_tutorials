@@ -1,10 +1,11 @@
+#coding:utf-8
 """
 Newton法
 Rosenbrock函数
 函数 f(x)=100*(x(2)-x(1).^2).^2+(1-x(1)).^2
 梯度 g(x)=(-400*(x(2)-x(1)^2)*x(1)-2*(1-x(1)),200*(x(2)-x(1)^2))^(T)
 """
-
+from __future__ import print_function
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -20,6 +21,7 @@ X2=np.arange(-3.5,2+0.05,0.05)
 f=100*(x2-x1**2)**2+(1-x1)**2; # 给定的函数
 plt.contour(x1,x2,f,20) # 画出函数的20条轮廓线
 
+print(x1.shape, x2.shape)
 
 def newton(x0):
 
