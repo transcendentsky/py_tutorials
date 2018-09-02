@@ -11,3 +11,4 @@ ptb
 *.o
 *checkpoint*
 tf_new_tutorials/tf_logs/
+*.pth
