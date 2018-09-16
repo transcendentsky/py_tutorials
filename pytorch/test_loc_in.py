@@ -135,8 +135,8 @@ for i in range(1001):
     loss.backward()
     opt.step()
     print("                                    locs: {}  loss : {}".format(locs.size(), loss.data[0]), end='\r')
-    if i % 200 == 0:
-        tloss = tloss / 200.0
+    if i % 10 == 0:
+        tloss = tloss / 10.0
         print("\n[EVAL] tloss: {}".format(tloss))
         writer.add_scalar("train loss", tloss, i/200)
         tloss = 0
@@ -153,7 +153,7 @@ for i in range(1001):
             test_loss += loss
         print("[EVAL] eval loss: {}".format(test_loss/100.0))
         print("lr={}".format(opt.param_groups[0]['lr']))
-        writer.add_scalar("eval loss", test_loss/100.0, i/200)
+        writer.add_scalar("eval loss", test_loss/100.0, i/10)
         # test
         # inputs, locs = next(testloader.yield_data())
         # inputs, locs = torch.FloatTensor(inputs), torch.FloatTensor(locs)

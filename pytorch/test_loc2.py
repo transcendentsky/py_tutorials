@@ -9,7 +9,7 @@ from torch.autograd import Variable
 import torch.nn.functional as F
 from torch.optim import lr_scheduler
 from tensorboardX import SummaryWriter
-writer = SummaryWriter(log_dir='./loc2_fixeded')
+writer = SummaryWriter(log_dir='./loc2_fixeded2')
 
 class Net(nn.Module):
     def __init__(self):
@@ -141,18 +141,18 @@ for i in range(1001):
     inputs, locs, locs_2 = Variable(inputs), Variable(locs), Variable(locs_2)
     o = net(inputs)
     # print(o.size(), locs.size())
-    loss1 = F.smooth_l1_loss(o,locs)
-    loss2 = F.smooth_l1_loss(o,locs_2)
+    loss1 = F.smooth_l1_loss(o, locs)
+    loss2 = F.smooth_l1_loss(o, locs_2)
     loss = loss1*alpha + loss2*(1-alpha)
     tloss += loss.data.item()
     loss.backward()
     opt.step()
 
     print("                                    locs: {}  loss : {}".format(locs.size(), loss.data[0]), end='\r')
-    if i % 200 == 0:
-        tloss = tloss / 200.0
+    if i % 10 == 0:
+        tloss = tloss / 10.0
         print("\n[EVAL] tloss: {}".format(tloss))
-        writer.add_scalar("train loss", tloss, i/200)
+        writer.add_scalar("train loss", tloss, i/10)
         tloss = 0
         # eval
         test_loss = 0
@@ -163,11 +163,11 @@ for i in range(1001):
             inputs, locs = Variable(inputs), Variable(locs)
             # inputs, locs = Variable(inputs).cuda(), Variable(locs).cuda()
             o = net(inputs)
-            loss = F.smooth_l1_loss(o,locs)
-            test_loss += loss
+            loss = F.smooth_l1_loss(o, locs)
+            test_loss += loss.data[0]
         print("[EVAL] eval loss: {}".format(test_loss/100.0))
         print("lr={}".format(opt.param_groups[0]['lr']))
-        writer.add_scalar("eval loss", test_loss/100.0, i / 200)
+        writer.add_scalar("eval loss", test_loss/100.0, i / 10)
         # test
         # inputs, locs = next(testloader.yield_data())
         # inputs, locs = torch.FloatTensor(inputs), torch.FloatTensor(locs)
@@ -177,4 +177,4 @@ for i in range(1001):
         net.train()
         sche.step(i)
 
-torch.save(net.state_dict(), 'test.pth')
+# torch.save(net.state_dict(), 'test.pth')
