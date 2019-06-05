@@ -7,6 +7,7 @@ import torchvision
 import torchvision.transforms as transforms
 from torch.autograd import Variable
 
+# DIY custom data loader
 class CustomDataLoader(data.Dataset):
     def __init__(self):
         self.nums = np.arange(100)

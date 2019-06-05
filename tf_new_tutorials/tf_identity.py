@@ -19,7 +19,7 @@ def main1():
 
     with tf.Session() as session:
         init.run()
-        for i in xrange(5):
+        for i in range(5):
             print(y.eval())
             # 相当于sess.run(y)，按照我们的预期，由于control_dependencies的作用，
             # 所以应该执行print前都会先执行x_plus_1，但是这种情况会出问题
@@ -27,6 +27,8 @@ def main1():
 
 def main2():
     x = tf.Variable(1.0)
+    xxx = tf.Variable(-1.0)
+    xabs = tf.abs(xxx)
     # y = tf.Variable(0.0)
     x_plus_1 = tf.assign_add(x, 1)
 
@@ -36,7 +38,8 @@ def main2():
 
     with tf.Session() as session:
         init.run()
-        for i in xrange(5):
+        print(xabs.eval())
+        for i in range(5):
             print(y.eval())
 
 main2()
