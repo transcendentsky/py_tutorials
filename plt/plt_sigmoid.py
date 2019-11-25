@@ -27,17 +27,20 @@ def show_plot(times, epochs, data):
 from matplotlib import pylab
 import pylab as plt
 import numpy as np
-
+###
+### Pylab : another interface of matplotlib , similiar as pyplot
 
 # sigmoid = lambda x: 1 / (1 + np.exp(-x))
 def sigmoid(x):
     n = 200
-    alpha = .1
+    alpha = .2
     return (1 / (1 + np.exp(-(x-n)*alpha)))
 
 
 mySamples = []
 mySigmoid = []
+
+fig, ax = plt.subplots()
 
 # generate an Array with value ???
 # linespace generate an array from start and stop value
@@ -45,13 +48,14 @@ mySigmoid = []
 #
 # x = plt.linspace(0, 400, 300)
 y = plt.linspace(0, 400, 300)
+print(y)
 
 # prepare the plot, associate(ax11, ax12, ax13, ax14), (ax21, ax22, ax23, ax24) the color r(ed) or b(lue) and the label
 # plt.plot(x, sigmoid(x), 'r', label='linspace(-10,10,10)')
 plt.plot(y, sigmoid(y), 'b', label='linspace(-10,10,100)')
 
 # Draw the grid line in background.
-# plt.grid()
+plt.grid()
 
 # Title & Subtitle
 # plt.title('Sigmoid Function')
@@ -68,8 +72,9 @@ plt.gca().xaxis.set_major_locator(plt.MultipleLocator(50))
 plt.gca().yaxis.set_major_locator(plt.MultipleLocator(0.1))
 
 # plt.plot(x)
-# plt.ylabel('$\lambda$')
-# plt.xlabel('epoch')
+plt.ylabel('$\lambda$')
+plt.xlabel('epoch')
 
 # create the graph
 plt.show()
+fig.savefig('./sigmoid.eps', dpi=600, format='eps')

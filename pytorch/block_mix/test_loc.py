@@ -135,7 +135,7 @@ for i in range(1001):
     loss.backward()
     opt.step()
     print("                                    "
-          "locs: {}  loss : {}".format(locs.size(), loss.data[0]), end='\r')
+          "locs: {}  loss : {}".format(locs.size(), loss.item()), end='\r')
     if i % 10 == 0:
         tloss = tloss / 10.0
         print("\n[EVAL] tloss: {}".format(tloss))
@@ -151,7 +151,7 @@ for i in range(1001):
             # inputs, locs = Variable(inputs).cuda(), Variable(locs).cuda()
             o = net(inputs)
             loss = F.smooth_l1_loss(o,locs)
-            test_loss += loss.data[0]
+            test_loss += loss.item()
         print("[EVAL] eval loss: {}".format(test_loss/100.0))
         print("lr={}".format(opt.param_groups[0]['lr']))
         writer.add_scalar("eval loss", test_loss/100.0, i/10)

@@ -49,7 +49,7 @@ def plt_tables(times, epochs, data):
 
 
 def show_plot(times, epochs, data):
-    # 折线图 Or Scatter
+    # line chart Or Scatter chart
     plt.figure(figsize=(8, 5))
     """
     args:
@@ -64,6 +64,7 @@ def show_plot(times, epochs, data):
     plt.xlabel('epochs')
     plt.ylabel('data')
     plt.title('Test')
+    plt.ylim(1.5, 5)
     plt.show()
 
 
@@ -103,6 +104,9 @@ def show_hist(times, epochs, data):
     # plt.hist(y, bins=20, label=['1st', '2nd'], color=['b', 'm'], stacked=True, rwidth=0.8)
     # 参数stacked = True表示堆叠的直方图
 
+def show_bar():
+    # bar-graph
+    plt.bar()
 
 def others():
     '''
@@ -119,7 +123,8 @@ if __name__ == '__main__':
     # epochs = np.random.rand(100)
     # data = np.random.rand(100)
     data = np.random.rand(200).reshape((100, 2))
+    print(data)
 
-    show_plot(None, epochs, data)
+    # show_plot(None, epochs, data)
     # show_scatter(None, epochs, data)
-    # show_hist(None, epochs, data)
+    show_hist(None, epochs, data)

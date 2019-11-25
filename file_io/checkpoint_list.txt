@@ -1,3 +1,0 @@
-epoch 58: ./experiments/models/ssd_vgg16_voc/ssd_vgg16_voc_epoch_58.pth
-epoch 59: ./experiments/models/ssd_vgg16_voc/ssd_vgg16_voc_epoch_59.pth
-epoch 60: ./experiments/models/ssd_vgg16_voc/ssd_vgg16_voc_epoch_60.pth
