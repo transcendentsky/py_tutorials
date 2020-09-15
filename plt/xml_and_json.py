@@ -40,6 +40,8 @@ def get_json(filename):
     # load_dict['smallberg'] = [8200, {1: [['Python', 81], ['shirt', 300]]}]
     # print(load_dict)
 
+    json.dumps(load_dict, sort_keys=True)
+
 def findfile():
     files = os.listdir('.')
     for file in files:
