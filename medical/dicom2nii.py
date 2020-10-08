@@ -12,6 +12,6 @@ for d in os.listdir(dicom_dir):
     if os.path.isdir(os.path.join(dicom_dir, d)):
         print("Converting...")
         nii_name = os.path.join(dicom_dir, d+".nii.gz")
-        dicom2nifti.dicom_series_to_nifti(os.path.join(dicom_dir, d), nii_name, reorient_nifti=True)
+        dicom2nifti.dicom_series_to_nifti(os.path.join(dicom_dir, d), nii_name, reorient_nifti=False)
 
 # dicom2nifti.convert_directory()
