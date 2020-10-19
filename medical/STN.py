@@ -23,6 +23,21 @@ class Interpolator(object):
         self.DecoderCoords = DecoderCoords
         # X, Y
 
+use_cuda = torch.cuda.is_available()
+
+    # Training dataset
+train_loader = torch.utils.data.DataLoader(
+    datasets.MNIST(root='.', train=True, download=True,
+                transform=transforms.Compose([
+                    transforms.ToTensor(),
+                    transforms.Normalize((0.1307,), (0.3081,))
+                ])), batch_size=64, shuffle=True, num_workers=4)
+# Test dataset
+test_loader = torch.utils.data.DataLoader(
+    datasets.MNIST(root='.', train=False, transform=transforms.Compose([
+        transforms.ToTensor(),
+        transforms.Normalize((0.1307,), (0.3081,))
+    ])), batch_size=64, shuffle=True, num_workers=4)
 
 
 class Net(nn.Module):
@@ -61,9 +76,47 @@ class Net(nn.Module):
         xs = xs.view(-1, 10 * 3 * 3)
         theta = self.fc_loc(xs)
         theta = theta.view(-1, 2, 3)
+        print("###############")
+        print(theta.size())
+        print(x.size())
 
-        grid = F.affine_grid(theta, x.size())
-        x = F.grid_sample(x, grid)
+        # grid = F.affine_grid(theta, x.size())
+        # x = F.grid_sample(x, grid)
+        print("============= grid =============")
+        
+        ys, xs = torch.meshgrid(torch.arange(5), torch.arange(5))
+        # ys = torch.unsqueeze(ys, -1)
+        # xs = torch.unsqueeze(xs, -1)
+        print("ys.shape: ", ys.shape)
+        ys = torch.reshape(ys, (25,1))
+        xs = torch.reshape(xs, (25,1))
+        ones = torch.ones((25,1))
+        grid = torch.cat([xs, ys, ones], axis=-1)
+        grid = torch.unsqueeze(grid, 0)
+        print(grid.size())
+        grid = grid.expand(x.size(0), grid.size(1), grid.size(2))
+        print(grid.size())
+        # print(grid[0, :, :])
+        print("&&&&&&&&&&&&&&&&&&&")
+        # print(grid[0, :, :, :])
+        # grid = grid.view(-1, 3, 1)
+        grid = torch.reshape(grid, (x.size(0)*25, 3, 1))
+        grid2 = torch.reshape(grid, (x.size(0), 25, 3))
+        # print(grid2[0,:,:])
+        print(grid.shape)
+        
+        # example
+        grid2 = torch.ones((x.size(0), 3, 1))
+        results = []
+        for i in range(x.size(0)):
+            r = torch.matmul(theta[i, :, :], grid2[i,:,:])
+            r = torch.unsqueeze(r, 0)
+            results.append(r)
+        result = torch.cat(results)
+        print(result.shape)
+        
+        # torch.matmul(x, theta)
+        exit(0)
 
         return x
 
@@ -80,6 +133,7 @@ class Net(nn.Module):
         x = self.fc2(x)
         return F.log_softmax(x, dim=1)
 
+
 def train(epoch):
     model.train()
     for batch_idx, (data, target) in enumerate(train_loader):
@@ -95,7 +149,7 @@ def train(epoch):
         if batch_idx % 500 == 0:
             print('Train Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}'.format(
                 epoch, batch_idx * len(data), len(train_loader.dataset),
-                100. * batch_idx / len(train_loader), loss.data[0]))
+                100. * batch_idx / len(train_loader), loss.item()))
 #
 # A simple test procedure to measure STN the performances on MNIST.
 #
@@ -164,44 +218,21 @@ def test_affine():
     data = np.random.rand(10,2,3)
     grid = F.affine_grid(data, x.size())
 
-
-def testMnist():
-    use_cuda = torch.cuda.is_available()
-
-    # Training dataset
-    train_loader = torch.utils.data.DataLoader(
-        datasets.MNIST(root='.', train=True, download=True,
-                    transform=transforms.Compose([
-                        transforms.ToTensor(),
-                        transforms.Normalize((0.1307,), (0.3081,))
-                    ])), batch_size=64, shuffle=True, num_workers=4)
-    # Test dataset
-    test_loader = torch.utils.data.DataLoader(
-        datasets.MNIST(root='.', train=False, transform=transforms.Compose([
-            transforms.ToTensor(),
-            transforms.Normalize((0.1307,), (0.3081,))
-        ])), batch_size=64, shuffle=True, num_workers=4)
-        
-    model = Net()
-    if use_cuda:
-        model.cuda()
-
-    optimizer = optim.SGD(model.parameters(), lr=0.01)
-
-
-def testVisual():
-    # Visualization
-    for epoch in range(1, 20 + 1):
-        train(epoch)
-        test()
-
-    # Visualize the STN transformation on some input batch
-    visualize_stn()
-
-    plt.ioff()
-    plt.show()
     
+model = Net()
+if use_cuda:
+    model.cuda()
 
-if __name__ == '__main__':
-    testMnist()
-    # testVisual()
+optimizer = optim.SGD(model.parameters(), lr=0.01)
+
+# Visualization
+for epoch in range(1, 20 + 1):
+    train(epoch)
+    test()
+
+# Visualize the STN transformation on some input batch
+visualize_stn()
+
+plt.ioff()
+plt.show()
+

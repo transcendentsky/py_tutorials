@@ -12,4 +12,3 @@ ptb
 *checkpoint*
 tf_new_tutorials/tf_logs/
 *.pth
-*events.out*
