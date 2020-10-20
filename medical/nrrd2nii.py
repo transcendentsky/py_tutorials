@@ -16,6 +16,6 @@ for file in files:
 
     # save nifti
     img = nib.Nifti1Image(data, np.eye(4))
-    nib.save(img, os.path.join(baseDir, file[-8:-5] + '-segmentation.nii.gz'))
+    nib.save(img, os.path.join(baseDir, file[:-5] + '-segmentation.nii.gz'))
 
 """  xxx.nrrd  => xxx.nrrd-segmentation """
