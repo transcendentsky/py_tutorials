@@ -14,6 +14,20 @@ from pathlib import Path
 
 TUTILS_DEBUG = True
 
+
+def tfuncname(func):
+    def run(*argv, **kargs):
+        print("[Trans Utils] Print function name: ", end=" ")
+        print(func.__name__)
+        ret = func(*argv, **kargs)
+        # if argv:
+        #     ret = func(*argv)
+        # else:
+        #     ret = func()
+        return ret
+    return run
+
+@tfuncname
 def tt():
     # print("[Trans Utils] ", end="")
     pass
@@ -40,15 +54,16 @@ def generate_name():
     tt()
     return time_now() + generate_random_str(6)
     
-def write_image_np(image, filename):
-    tt()
-    cv2.imwrite("wc_" + generate_random_str(5)+'-'+ time_now() +".jpg", image.astype(np.uint8))
-    pass
+# def write_image_np(image, filename):
+#     tt()
+#     cv2.imwrite("wc_" + generate_random_str(5)+'-'+ time_now() +".jpg", image.astype(np.uint8))
+#     pass
 
-def tdir(dir_path):
-    tt()
+def tdir(*dir_paths):
+    dir_path = os.path.join(*dir_paths)
+    d(dir_path)
     if not os.path.exists(dir_path):
-        print("Create Dir Path: ", dir_path)
+        d("Create Dir Path: ", dir_path)
         os.makedirs(dir_path)
 
     return dir_path
@@ -61,7 +76,18 @@ def tfilename(*filenames):
         os.makedirs(parent)
     return filename
 
+def ttsave(state, path, configs=None):
+    path = tdir("trans_torch_models", path, generate_name())
+    if configs is not None:
+        assert type(configs) is dict
+        config_path = tfilename(path, "configs.json")
+        with open(config_path, "wb+") as f:
+            config_js = json.dumps(configs)
+            f.write(config_js)
+    torch.save(state, tfilename(path, "model.pkl"))
+    
 
 if __name__ == "__main__":
-    tfilename("dasd", "dasdsa")
+    tt()
+    # tfilename("dasd", "dasdsa")
 
