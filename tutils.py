@@ -13,7 +13,8 @@ import cv2
 from pathlib import Path
 
 TUTILS_DEBUG = True
-
+TUTILS_INFO = False
+TUTILS_WARNING = True
 
 def tfuncname(func):
     def run(*argv, **kargs):
@@ -86,6 +87,12 @@ def ttsave(state, path, configs=None):
             f.write(config_js)
     torch.save(state, tfilename(path, "model.pkl"))
     
+
+def add_total(tuple1, tuple2):
+    l = list()
+    for i, item in enumerate(tuple1):
+        l.append(tuple1[i] + tuple2[i])
+    return tuple(l)
 
 if __name__ == "__main__":
     tt()

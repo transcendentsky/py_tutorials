@@ -12,3 +12,5 @@ ptb
 *checkpoint*
 tf_new_tutorials/tf_logs/
 *.pth
+*workspace
+MNIST/*

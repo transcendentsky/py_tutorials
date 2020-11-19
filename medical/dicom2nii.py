@@ -7,10 +7,12 @@ import os
 
 # dicom_dir = "D://media/sample/"
 # dicom_dir = "D://media//medical//lsw//benign_65//fpAML_55"
-dicom_dir = "D:\media\medical\lsw//benign_65\oncocytoma_10"
+# dicom_dir = "D:\media\medical\lsw//benign_65\oncocytoma_10"
+dicom_dir = "/home1/quanquan/datasets/lsw/benign_65/fpAML_55"
 
 # output_dir = "D://media//medical//lsw_trans//benign_65//fpAML_55//"
-output_dir = "D:\media\medical\lsw//benign_65\oncocytoma_10"
+# output_dir = "D:\media\medical\lsw//benign_65\oncocytoma_10"
+output_dir = "/home1/quanquan/datasets/lsw_trans/benign_65/fpAML_55"
 
 if not os.path.exists(output_dir):
     os.makedirs(output_dir)

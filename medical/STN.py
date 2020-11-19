@@ -25,7 +25,7 @@ class Interpolator(object):
 
 use_cuda = torch.cuda.is_available()
 
-    # Training dataset
+# Training dataset
 train_loader = torch.utils.data.DataLoader(
     datasets.MNIST(root='.', train=True, download=True,
                 transform=transforms.Compose([
@@ -80,8 +80,12 @@ class Net(nn.Module):
         print(theta.size())
         print(x.size())
 
-        # grid = F.affine_grid(theta, x.size())
-        # x = F.grid_sample(x, grid)
+        grid = F.affine_grid(theta, x.size())
+        xs = F.grid_sample(x, grid)
+        print("grid.size() ", grid.size())
+        print(grid[0,:,:,:])
+        print("xs.size()", xs.size())
+        exit(0)
         print("============= grid =============")
         
         ys, xs = torch.meshgrid(torch.arange(5), torch.arange(5))
