@@ -16,8 +16,24 @@ TUTILS_DEBUG = True
 TUTILS_INFO = False
 TUTILS_WARNING = True
 
+def p(*s,end="\n", **kargs ):
+    if TUTILS_INFO:
+        print("[Trans Info] ", s, kargs, end="")
+        print("", end=end)
+
+def w(*s,end="\n", **kargs ):
+    if TUTILS_WARNING or TUTILS_DEBUG:
+        print("[Trans Warning] ", s, kargs, end="")
+        print("", end=end)
+
+def d(*s,end="\n", **kargs ):
+    if TUTILS_DEBUG:
+        print("[Trans Debug] ", s, kargs, end="")
+        print("", end=end)
+
 def tfuncname(func):
     def run(*argv, **kargs):
+        print("--------------------------------------------")
         print("[Trans Utils] Print function name: ", end=" ")
         print(func.__name__)
         ret = func(*argv, **kargs)
@@ -28,19 +44,10 @@ def tfuncname(func):
         return ret
     return run
 
-@tfuncname
+# @tfuncname
 def tt():
     # print("[Trans Utils] ", end="")
     pass
-
-def p(*s,end="\n", **kargs ):
-    print("[Trans Utils] ", s, kargs, end="")
-    print("", end=end)
-
-def d(*s,end="\n", **kargs ):
-    if TUTILS_DEBUG:
-        print("[Trans Utils] ", s, kargs, end="")
-        print("", end=end)
 
 def time_now():
     tt()
@@ -61,7 +68,16 @@ def generate_name():
 #     pass
 
 def tdir(*dir_paths):
-    dir_path = os.path.join(*dir_paths)
+    def checkslash(name):
+        if name.startswith("/"):
+            name = name[1:]
+            return checkslash(name)
+        else:
+            return name
+    names = [dir_paths[0]]
+    for name in dir_paths[1:]:
+        names.append(checkslash(name))
+    dir_path = os.path.join(*names)
     d(dir_path)
     if not os.path.exists(dir_path):
         d("Create Dir Path: ", dir_path)
@@ -70,12 +86,25 @@ def tdir(*dir_paths):
     return dir_path
 
 def tfilename(*filenames):
-    filename = os.path.join(*filenames)
+    def checkslash(name):
+        if name.startswith("/"):
+            name = name[1:]
+            return checkslash(name)
+        else:
+            return name
+    names = [filenames[0]]
+    for name in filenames[1:]:
+        names.append(checkslash(name))
+    filename = os.path.join(*names)
     d(filename)
     parent, name = os.path.split(filename)
     if not os.path.exists(parent):
         os.makedirs(parent)
     return filename
+
+def texists(*filenames):
+    path = os.path.join(*filenames)
+    return os.path.exists(path)
 
 def ttsave(state, path, configs=None):
     path = tdir("trans_torch_models", path, generate_name())
@@ -87,7 +116,6 @@ def ttsave(state, path, configs=None):
             f.write(config_js)
     torch.save(state, tfilename(path, "model.pkl"))
     
-
 def add_total(tuple1, tuple2):
     l = list()
     for i, item in enumerate(tuple1):
@@ -95,6 +123,7 @@ def add_total(tuple1, tuple2):
     return tuple(l)
 
 if __name__ == "__main__":
-    tt()
-    # tfilename("dasd", "dasdsa")
+    # tt()
+    # tfilename("dasd", "/dasdsa", "/dsad")
+    tdir("dasd", "/dsadads", "/dsdas")
 

@@ -14,3 +14,5 @@ tf_new_tutorials/tf_logs/
 *.pth
 *workspace
 MNIST/*
+*.jpg
+output_test*

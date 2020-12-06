@@ -30,7 +30,8 @@ def test1():
     dicom_names = reader.GetGDCMSeriesFileNames(dicom_path)
     reader.SetFileNames(dicom_names)
     
-    reader.ReadImageInformation()
+    # reader.ReadImageInformation() 
+    # # AttributeError: 'ImageSeriesReader' object has no attribute 'ReadImageInformation'    
     
     image = reader.Execute()
     nda = sitk.GetArrayFromImage(image)
@@ -47,6 +48,8 @@ def test1():
     print(type(image))
     print(size)
     print("Image size: ", size[0], size[1], size[2])
+    
+    
     
     # print("Writing Image", sys.argv[2])
     # sitk.WriteImage(image , sys.argv[2])
@@ -70,4 +73,5 @@ def test2():
 
 
 if __name__ == "__main__":
-    test2()
+    test1()
+    # test2()
