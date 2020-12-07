@@ -16,3 +16,5 @@ tf_new_tutorials/tf_logs/
 MNIST/*
 *.jpg
 output_test*
+*.jpeg
+*jpg
