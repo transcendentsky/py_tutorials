@@ -18,3 +18,5 @@ MNIST/*
 output_test*
 *.jpeg
 *jpg
+*.pth
+*.tar.gz
