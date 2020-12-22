@@ -68,7 +68,33 @@ def test1():
             cv2.imwrite(tfilename("output_test/sitk_201_1_label_p{}.jpg".format(i)), pimage)
             
         
+def test2():
+    print("Image NRRD! ")
+    # inputImageFileName = "/home1/quanquan/datasets/lsw/benign_65/fpAML_55/201_1.nrrd"
+    # input_dir1 = "E:/Documents/Quanquan-20200917/screencopy/43116392_screencopy/Dynamic_c"
+    # input_dir2 = "E:/Documents/Quanquan-20200917/screencopy/43116392_screencopy/T1_C"
+    input_dir1 = "/home1/quanquan/datasets/screencopy/43116392_screencopy/T1_C"
+    
+    image_names = np.array([x.name for x in os.scandir(input_dir1) if (x.name.endswith(".JPG") or x.name.endswith(".jpg"))])
+    print(image_names)
+    output_image_dir = tdir("/home1/quanquan/datasets/screencopy/43116392_screencopy/T1_C_c")
+    reader = sitk.ImageFileReader()
+    writer = sitk.ImageFileWriter()
+    
+    for i in range(len(image_names)):
+        
+        input_image_name = tfilename(input_dir1, image_names[i])
+        
+        reader.SetImageIO("JPEGImageIO") #PNGImageIO
+        reader.SetFileName(input_image_name)
+        jpg_image = reader.Execute()
+        
+        output_image_name = tfilename(output_image_dir, image_names[i][:-4] + ".nii.gz")
+        writer.SetFileName(output_image_name)
+        writer.Execute(jpg_image)
+
 
 
 if __name__ == "__main__":
-    test1()
+    # test1()
+    test2()
