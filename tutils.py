@@ -34,7 +34,7 @@ def d(*s,end="\n", **kargs ):
 def tfuncname(func):
     def run(*argv, **kargs):
         print("--------------------------------------------")
-        print("[Trans Utils] Print function name: ", end=" ")
+        print("[Trans Utils] Function Name: ", end=" ")
         print(func.__name__)
         ret = func(*argv, **kargs)
         # if argv:
