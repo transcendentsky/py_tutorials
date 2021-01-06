@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import matplotlib.patches as patch
+import os
 
 # 输出成图片查看得到boundingbox效果
 imagedir = r('D:\test_dataset\labelimage')

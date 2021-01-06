@@ -28,8 +28,17 @@ def w(*s,end="\n", **kargs ):
 
 def d(*s,end="\n", **kargs ):
     if TUTILS_DEBUG:
-        print("[Trans Debug] ", s, kargs, end="")
-        print("", end=end)
+        print("[Trans Debug] ", end="")
+        if len(s) > 0:
+            for x in s:
+                print(x, end="")
+            print("", end=end)
+        if len(kargs) >0:
+            for key, item in kargs.items():
+                print(key, end=": ")
+                print(item, end="")
+            print("", end=end)
+        # print("[Trans Debug] ", s, kargs, end="")
 
 def tfuncname(func):
     def run(*argv, **kargs):
@@ -125,5 +134,6 @@ def add_total(tuple1, tuple2):
 if __name__ == "__main__":
     # tt()
     # tfilename("dasd", "/dasdsa", "/dsad")
-    tdir("dasd", "/dsadads", "/dsdas")
+    # tdir("dasd", "/dsadads", "/dsdas")
+    d(wtf="dsa")
 

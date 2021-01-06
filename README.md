@@ -35,6 +35,10 @@ path/to/kits19
         ...
 ```
 ## Training
+Pre-processing
+```
+nii2pickle xxx
+```
 To train our model, run this scripts
 ```
 python -m scripts.train --epochs 300 --data_path path/to/kits19 

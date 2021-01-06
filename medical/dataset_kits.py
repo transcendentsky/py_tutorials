@@ -21,6 +21,14 @@ from tutils import *
 #  Resample to the same spacing
 #  cut off to [-79, 304] , and Z-Score
 #  remove some bad instances and correct some wrong labels
+#
+# Dataset Structure
+# /path/to/kits19/data/
+#     case_00000/
+#         imaging.nii.gz
+#         segmentation.nii.gz
+#     case_00xxx
+#     ......
 
 class Kits19(Dataset):
     
