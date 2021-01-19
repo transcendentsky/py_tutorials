@@ -13,8 +13,7 @@ import cv2
 from torch.utils.data import Dataset, DataLoader
 import SimpleITK as sitk
 from tqdm import tqdm
-
-
+import monai 
 from tutils import *
 
 ## Dataset pipeline
@@ -30,14 +29,44 @@ from tutils import *
 #     case_00xxx
 #     ......
 
+# ------------  torchvision.transforms  Not used in this script  --------------------
+# train_augmentation = torchvision.transforms.Compose([torchvision.transforms.Resize(256),
+#                                                     torchvision.transforms.RandomCrop(224), "PIL Image type" required                                                                            
+#                                                     torchvision.transforms.RandomHorizontalFlip(),
+#                                                     torchvision.transforms.ToTensor(),
+#                                                     torchvision.transforms.Normalize([0.485, 0.456, -.406],[0.229, 0.224, 0.225])
+#                                                     ])
+# img_tensor = torchvision.transforms.ToTensor()(img_np)
+# img_tensor = torchvision.transforms.RandomHorizontalFlip(p=1)(img_tensor)
+# img_tensor = torchvision.transforms.RandomCrop(224)(img_tensor)
+
+# -----------  monai.transforms  Usage as same as torchvision  -----------------------
+#  RandRotate90(prob=0.5, spatial_axes=(0, 1)),
+        # AddChannel(),
+        # ToTensor(),
+        # ScaleIntensity(),
+        # AddChannel(),
+        # RandSpatialCrop((96, 96), random_size=False),
+
+
 class Kits19(Dataset):
     
-    def __init__(self, load_mod:str="all", datadir:str="/home1/quanquan/datasets/kits19/data"):
+    def __init__(self, load_mod:str="all", 
+                 datadir:str="/home1/quanquan/datasets/kits19/data", 
+                 view:str="cor", 
+                 output_size=96,
+                 transforms=[],
+                 ):
+        """
+        view: cor/sag
+        """
         self.datadir  = datadir
         self.load_mod = load_mod
-        
+        # torchvision transforms
+        self.transforms = transforms
         self.dirnames = np.array([x.name for x in os.scandir(datadir) if (os.path.isdir(x.path) and x.name.startswith("case_"))])
-        self.dirnames.sort()
+        self.dirnames.sort()   
+        self.view = view
         
     def __getitem__(self, index):
         image_name = "imaging.nii.gz"
@@ -50,6 +79,36 @@ class Kits19(Dataset):
         reader.SetImageIO("NiftiImageIO")
         reader.SetFileName(image_path)
         image = reader.Execute()
+        
+        if self.load_mod == "sr_x4_slice":
+            img_np = sitk.GetArrayFromImage(image)
+            if self.view == "cor":
+                assert img_np.shape[2] >= 12
+                i = random.choice(range(0,img_np.shape[2]-12))
+                img_tensor = torchvision.transforms.ToTensor()(img_np).float()
+                img_tensor = monai.transforms.RandSpatialCrop((96, 96), random_size=False)(img_tensor)
+                target = img_tensor[i:i+12,:,:] 
+                tinput = target[0::4,:,:]
+            elif self.view == "sag":
+                raise ValueError()
+            else:
+                raise NotImplementedError()
+            return tinput, target
+        
+        if self.load_mod == "sr_x2_slice":
+            img_np = sitk.GetArrayFromImage(image)
+            if self.view == "cor":
+                assert img_np.shape[2] >= 12
+                i = random.choice(range(0,img_np.shape[2]-12))
+                img_tensor = torchvision.transforms.ToTensor()(img_np).float()
+                img_tensor = monai.transforms.RandSpatialCrop((96, 96), random_size=False)(img_tensor)
+                target = img_tensor[i:i+6,:,:] 
+                tinput = target[0::2,:,:]
+            elif self.view == "sag":
+                raise ValueError()
+            else:
+                raise NotImplementedError()
+            return tinput, target
         
         if self.load_mod == "img_only":
             # check if clipped:
@@ -83,10 +142,10 @@ class Kits19(Dataset):
     def z_score(self, index, output_dir, avg, delta):
         image, label = self.__getitem__(index)
         image_scored = (image*1.0 - avg)/delta
-        label_scored = (label*1.0 - avg)/delta
+        # label_scored = (label*1.0 - avg)/delta
         
         image = sitk.GetImageFromArray(image_scored)
-        label = sitk.GetImageFromArray(label_scored)
+        label = sitk.GetImageFromArray(label)
         
         output_image_path = tfilename(output_dir, self.dirnames[index], "imaging.nii.gz")
         output_label_path = tfilename(output_dir, self.dirnames[index], "segmentation.nii.gz")
@@ -126,9 +185,16 @@ class Kits19(Dataset):
         self.load_mod = "resample_kits"
         for index in range(self.__len__()):
             self.resample_data(index, output_dir)
+            
+    def print_data_property():
+        print()
         
     def __len__(self):
         return len(self.dirnames)
+    
+def do_transform(img:np.ndarray, transforms:list=[]):
+    if len(transforms) > 0 :
+        pass
     
 @tfuncname
 def resampleImage(Image:sitk.SimpleITK.Image, SpacingScale=None, NewSpacing=None, NewSize=None, Interpolator=sitk.sitkLinear)->sitk.SimpleITK.Image:
@@ -178,8 +244,7 @@ def resampleImage(Image:sitk.SimpleITK.Image, SpacingScale=None, NewSpacing=None
 @tfuncname
 def _z_score_1():
     # First: get the avg.
-    avg_total = 0
-   
+    avg_total = 0 
     kits = Kits19(load_mod="img_only", datadir="/home1/quanquan/datasets/kits19/resampled_data")
     _len = len(kits)
     for i in tqdm(range(_len)):
@@ -241,9 +306,18 @@ def test_resample():
     # image_np
 # -------------------------------------------
 
+def test_check_data():
+    dataset = Kits19(load_mod="sr_slice", datadir="/home1/quanquan/datasets/kits19/resampled_data")
+    for _ in range(100):
+        i = random.choice(range(0, len(dataset)))
+        data = dataset.__getitem__(i)
+        import ipdb; ipdb.set_trace()
+        print(data.shape)
+
     
 if __name__ == "__main__":
     # _z_score_1()
     # _z_score_2()
     # _z_score_3()
-    test_z_score_0()
+    # test_z_score_0()
+    test_check_data()

@@ -3,6 +3,7 @@ import os
 import numpy as np
 import torch
 import random
+import torchvision
 import string
 
 import random
@@ -11,24 +12,50 @@ import cv2
 
 from pathlib import Path
 
-TUTILS_DEBUG = True
-TUTILS_INFO = True
-TUTILS_WARNING = True
 
-def p(*s,end="\n", **kargs ):
-    if TUTILS_INFO:
-        print("[Trans Info] ", s, kargs, end="")
+class Config(object):
+    def __init__(self):
+        super().__init__()
+        self.TUTILS_DEBUG = True
+        self.TUTILS_INFO = False
+        self.TUTILS_WARNING = True
+    
+    def set_print_debug(self, setting=True):
+        self.TUTILS_DEBUG = setting
+        
+    def set_print_info(self, setting=True):
+        self.TUTILS_INFO = setting
+        
+    def set_print_warning(self, setting=True):
+        self.TUTILS_WARNING = setting
+
+tconfig = Config()
+
+def tprint(*s,end="\n", **kargs):
+    if len(s) > 0:
+        for x in s:
+            print(x, end="")
+        print("", end=end)
+    if len(kargs) >0:
+        for key, item in kargs.items():
+            print(key, end=": ")
+            print(item, end="")
         print("", end=end)
 
-def w(*s,end="\n", **kargs ):
-    if TUTILS_WARNING or TUTILS_DEBUG:
-        print("[Trans Warning] ", s, kargs, end="")
-        print("", end=end)
+def p(*s,end="\n", **kargs):
+    if tconfig.TUTILS_INFO or tconfig.TUTILS_DEBUG or tconfig.TUTILS_WARNING:
+        print("[Trans Info] ", end="")
+        tprint(*s,end="\n", **kargs)
 
-def d(*s,end="\n", **kargs ):
-    if TUTILS_DEBUG:
-        print("[Trans Debug] ", s, kargs, end="")
-        print("", end=end)
+def w(*s,end="\n", **kargs):
+    if tconfig.TUTILS_WARNING or tconfig.TUTILS_DEBUG:
+        print("[Trans Warning] ", end="")
+        tprint(*s,end="\n", **kargs)
+
+def d(*s,end="\n", **kargs):
+    if tconfig.TUTILS_DEBUG:
+        print("[Trans Debug] ", end="")
+        tprint(*s,end="\n", **kargs)
 
 def tfuncname(func):
     def run(*argv, **kargs):
@@ -124,5 +151,6 @@ def add_total(tuple1, tuple2):
 if __name__ == "__main__":
     # tt()
     # tfilename("dasd", "/dasdsa", "/dsad")
-    tdir("dasd", "/dsadads", "/dsdas")
+    # tdir("dasd", "/dsadads", "/dsdas")
+    d(wtf="dsa")
 

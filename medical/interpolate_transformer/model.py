@@ -1,68 +1,71 @@
 import torch
 import numpy as np
-import torchvison
+import torchvision
 import torch.nn as nn   
-
-
+from torchvision.models._utils import IntermediateLayerGetter
+import torch.nn.functional as F
 
 
 class IPT(nn.Module):
-    def __init__(self):
+    def __init__(self, backbone, transformer, image_decoder):
         super().__init__() 
+        self.backbone = backbone
+        self.transformer = transformer
+        self.f2image = image_decoder
         
     def forward(self, x ):
+        # (3,128,128) => (3*4 , 128, 128)
+        f = self.backbone(x)  
+        import ipdb; ipdb.set_trace()
+        # (b c m n) => (b c2 m n)
+        f_patch = self.get_patch(f)
+        f2_patch = self.transformer(f_patch)
+        f2 = self.combine(f2_patch)
+        image = f2image(f2)
+        import ipdb; ipdb.set_trace()
         pass
         
-        
-class Attention(nn.Module):
-    def __init__(self, dim, heads = 8, dropout = 0.1):
-        super().__init__()
-        self.heads = heads
-        self.scale = dim ** -0.5  # 1/sqrt(dim)
-
-        self.to_qkv = nn.Linear(dim, dim * 3, bias = True) # Wq,Wk,Wv for each vector, thats why *3
-        torch.nn.init.xavier_uniform_(self.to_qkv.weight)
-        torch.nn.init.zeros_(self.to_qkv.bias)
-        
-        self.nn1 = nn.Linear(dim, dim)
-        torch.nn.init.xavier_uniform_(self.nn1.weight)
-        torch.nn.init.zeros_(self.nn1.bias)        
-        self.do1 = nn.Dropout(dropout)
-        
-
-    def forward(self, x, mask = None):
-        b, n, _, h = *x.shape, self.heads
-        qkv = self.to_qkv(x) #gets q = Q = Wq matmul x1, k = Wk mm x2, v = Wv mm x3
-        q, k, v = rearrange(qkv, 'b n (qkv h d) -> qkv b h n d', qkv = 3, h = h) # split into multi head attentions
-
-        dots = torch.einsum('bhid,bhjd->bhij', q, k) * self.scale
-
-        if mask is not None:
-            mask = F.pad(mask.flatten(1), (1, 0), value = True)
-            assert mask.shape[-1] == dots.shape[-1], 'mask has incorrect dimensions'
-            mask = mask[:, None, :] * mask[:, :, None]
-            dots.masked_fill_(~mask, float('-inf'))
-            del mask
-
-        attn = dots.softmax(dim=-1) #follow the softmax,q,d,v equation in the paper
-
-        out = torch.einsum('bhij,bhjd->bhid', attn, v) #product of v times whatever inside softmax
-        out = rearrange(out, 'b h n d -> b n (h d)') #concat heads into one matrix, ready for next encoder block
-        out =  self.nn1(out)
-        out = self.do1(out)
-        return out
-
-class Transformer(nn.Module):
-    def __init__(self, dim, depth, heads, mlp_dim, dropout):
-        super().__init__()
-        self.layers = nn.ModuleList([])
-        for _ in range(depth):
-            self.layers.append(nn.ModuleList([
-                Residual(LayerNormalize(dim, Attention(dim, heads = heads, dropout = dropout))),
-                Residual(LayerNormalize(dim, MLP_Block(dim, mlp_dim, dropout = dropout)))
-            ]))
-    def forward(self, x, mask = None):
-        for attention, mlp in self.layers:
-            x = attention(x, mask = mask) # go to attention
-            x = mlp(x) #go to MLP_Block
         return x
+        
+    def get_patch(self, x ):
+        # TODO
+        return x
+        pass
+    
+    def combine(self, x):
+        # TODO
+        return x
+        pass 
+        
+
+class SimpleImageDecoder(nn.Module):
+    def __init__(self, input_dim=256, sr_size=(96,96), times=2):
+        super().__init__()
+        self.output_dim = 3 * times
+        self.sr_size = sr_size
+        self.kernel_size = 3
+        # self.linear_1 = nn.Linear(input_dim, output_dim//2, bias=True)
+        # self.linear_2 = nn.Linear(output_dim//2, output_dim, bias=True)
+        self.linear_m1 = nn.Linear(100, 1000, bias=True)
+        self.linear_m2 = nn.Linear(1000, 96*96, bias=True)
+        self.linear_c1 = nn.Linear(256, 3*times, bias=True)
+        
+        # self.conv1 = nn.Conv2d(256,          output_dim*2, self.kernel_size, padding=1, stride=1)
+        # self.conv2 = nn.Conv2d(output_dim*2, output_dim*2, self.kernel_size, padding=1, stride=1)
+        # self.conv3 = nn.Conv2d(output_dim*2, output_dim,   self.kernel_size, padding=1, stride=1)
+        # self.gn1   = torch.nn.GroupNorm(8, output_dim*2)
+        # self.gn2   = torch.nn.GroupNorm(8, output_dim*2)
+        
+    def forward(self, x):
+        x = x.transpose(-1, -2)
+        x = self.linear_m1(x)
+        x = self.linear_m2(x)
+        x = x.transpose(-1, -2)
+        x = self.linear_c1(x)
+        x = x.transpose(-1, -2)
+        b, c, mn = x.size()
+        # import ipdb; ipdb.set_trace()
+        assert mn == self.sr_size[0]*self.sr_size[1], f"mn: {mn}, sr: {self.sr_size}"
+        x = x.view(b, self.output_dim, self.sr_size[0], self.sr_size[1])
+        return x
+
