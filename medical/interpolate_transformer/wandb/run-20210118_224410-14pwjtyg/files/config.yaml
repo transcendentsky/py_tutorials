@@ -1,0 +1,58 @@
+wandb_version: 1
+
+_wandb:
+  desc: null
+  value:
+    cli_version: 0.10.1
+    framework: torch
+    is_jupyter_run: false
+    is_kaggle_kernel: false
+    python_version: 3.6.10
+batch_size:
+  desc: null
+  value: 32
+dec_layers:
+  desc: null
+  value: 6
+dim_feedforward:
+  desc: null
+  value: 1024
+dropout:
+  desc: null
+  value: 0.1
+enc_layers:
+  desc: null
+  value: 6
+epochs:
+  desc: null
+  value: 300
+hidden_dim:
+  desc: null
+  value: 256
+log_interval:
+  desc: null
+  value: 10
+lr:
+  desc: null
+  value: 0.0001
+lr_drop:
+  desc: null
+  value: 0.85
+modelname:
+  desc: null
+  value: IPT
+nheads:
+  desc: null
+  value: 8
+num_queries:
+  desc: null
+  value: 100
+output_dir:
+  desc: null
+  value: .
+pre_norm:
+  desc: null
+  value: false
+weight_decay:
+  desc: null
+  value: 0.0001

@@ -1,0 +1,81 @@
+2021-01-18 22:10:55,736 INFO    MainThread:16129 [internal.py:wandb_internal():62] W&B internal server running at pid: 16129
+2021-01-18 22:10:55,740 DEBUG   HandlerThread:16129 [handler.py:handle_request():54] handle_request: login
+2021-01-18 22:10:55,741 DEBUG   SenderThread:16129 [sender.py:send():91] send: request
+2021-01-18 22:10:55,741 DEBUG   SenderThread:16129 [sender.py:send_request():100] send_request: login
+2021-01-18 22:10:55,749 DEBUG   SenderThread:16129 [connectionpool.py:_new_conn():943] Starting new HTTPS connection (1): api.wandb.ai:443
+2021-01-18 22:10:56,190 DEBUG   SenderThread:16129 [connectionpool.py:_make_request():442] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 200 None
+2021-01-18 22:10:56,192 INFO    SenderThread:16129 [sender.py:send_request_login():147] Login server info: {'cliVersionInfo': {'min_cli_version': '0.8.20', 'max_cli_version': '0.10.13'}}
+2021-01-18 22:10:56,195 DEBUG   HandlerThread:16129 [handler.py:handle_request():54] handle_request: check_version
+2021-01-18 22:10:56,195 DEBUG   SenderThread:16129 [sender.py:send():91] send: header
+2021-01-18 22:10:56,196 INFO    WriterThread:16129 [datastore.py:open_for_write():76] open: wandb/run-20210118_221055-1oi8amc1/run-1oi8amc1.wandb
+2021-01-18 22:10:56,197 DEBUG   SenderThread:16129 [sender.py:send():91] send: request
+2021-01-18 22:10:56,197 DEBUG   SenderThread:16129 [sender.py:send_request():100] send_request: check_version
+2021-01-18 22:10:56,199 DEBUG   Thread-4  :16129 [connectionpool.py:_new_conn():943] Starting new HTTPS connection (1): pypi.org:443
+2021-01-18 22:10:59,565 DEBUG   SenderThread:16129 [sender.py:send():91] send: run
+2021-01-18 22:10:59,574 DEBUG   SenderThread:16129 [cmd.py:execute():719] Popen(['git', 'cat-file', '--batch-check'], cwd=/home1/quanquan/code/py_tutorials, universal_newlines=False, shell=None, istream=<valid stream>)
+2021-01-18 22:10:59,596 DEBUG   SenderThread:16129 [connectionpool.py:_new_conn():943] Starting new HTTPS connection (1): api.wandb.ai:443
+2021-01-18 22:11:00,348 DEBUG   SenderThread:16129 [connectionpool.py:_make_request():442] https://api.wandb.ai:443 "POST /graphql HTTP/1.1" 403 None
+2021-01-18 22:11:00,351 ERROR   SenderThread:16129 [internal_api.py:execute():118] 403 response executing GraphQL.
+2021-01-18 22:11:00,352 ERROR   SenderThread:16129 [internal_api.py:execute():119] {"errors":[{"message":"permission denied","path":["upsertBucket"],"extensions":{"code":"PERMISSION_ERROR"}}],"data":{"upsertBucket":null}}
+2021-01-18 22:11:00,566 INFO    WriterThread:16129 [datastore.py:close():257] close: wandb/run-20210118_221055-1oi8amc1/run-1oi8amc1.wandb
+2021-01-18 22:11:00,566 INFO    HandlerThread:16129 [handler.py:finish():267] shutting down handler
+2021-01-18 22:11:00,745 ERROR   MainThread:16129 [internal.py:wandb_internal():128] Thread SenderThread:
+Traceback (most recent call last):
+  File "/home1/quanquan/miniconda3/envs/py3/lib/python3.6/site-packages/wandb/old/retry.py", line 96, in __call__
+    result = self._call_fn(*args, **kwargs)
+  File "/home1/quanquan/miniconda3/envs/py3/lib/python3.6/site-packages/wandb/internal/internal_api.py", line 121, in execute
+    six.reraise(*sys.exc_info())
+  File "/home1/quanquan/miniconda3/envs/py3/lib/python3.6/site-packages/six.py", line 703, in reraise
+    raise value
+  File "/home1/quanquan/miniconda3/envs/py3/lib/python3.6/site-packages/wandb/internal/internal_api.py", line 115, in execute
+    return self.client.execute(*args, **kwargs)
+  File "/home1/quanquan/miniconda3/envs/py3/lib/python3.6/site-packages/wandb/vendor/gql-0.2.0/gql/client.py", line 52, in execute
+    result = self._get_result(document, *args, **kwargs)
+  File "/home1/quanquan/miniconda3/envs/py3/lib/python3.6/site-packages/wandb/vendor/gql-0.2.0/gql/client.py", line 60, in _get_result
+    return self.transport.execute(document, *args, **kwargs)
+  File "/home1/quanquan/miniconda3/envs/py3/lib/python3.6/site-packages/wandb/vendor/gql-0.2.0/gql/transport/requests.py", line 39, in execute
+    request.raise_for_status()
+  File "/home1/quanquan/miniconda3/envs/py3/lib/python3.6/site-packages/requests/models.py", line 941, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 403 Client Error: Forbidden for url: https://api.wandb.ai/graphql
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home1/quanquan/miniconda3/envs/py3/lib/python3.6/site-packages/wandb/apis/normalize.py", line 25, in wrapper
+    return func(*args, **kwargs)
+  File "/home1/quanquan/miniconda3/envs/py3/lib/python3.6/site-packages/wandb/internal/internal_api.py", line 839, in upsert_run
+    mutation, variable_values=variable_values, **kwargs)
+  File "/home1/quanquan/miniconda3/envs/py3/lib/python3.6/site-packages/wandb/old/retry.py", line 105, in __call__
+    if not check_retry_fn(e):
+  File "/home1/quanquan/miniconda3/envs/py3/lib/python3.6/site-packages/wandb/util.py", line 574, in no_retry_auth
+    raise CommError("Permission denied, ask the project owner to grant you access")
+wandb.errors.error.CommError: Permission denied, ask the project owner to grant you access
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home1/quanquan/miniconda3/envs/py3/lib/python3.6/site-packages/wandb/internal/internal_util.py", line 33, in run
+    self._run()
+  File "/home1/quanquan/miniconda3/envs/py3/lib/python3.6/site-packages/wandb/internal/internal_util.py", line 60, in _run
+    self._process(record)
+  File "/home1/quanquan/miniconda3/envs/py3/lib/python3.6/site-packages/wandb/internal/internal.py", line 232, in _process
+    self._sm.send(record)
+  File "/home1/quanquan/miniconda3/envs/py3/lib/python3.6/site-packages/wandb/internal/sender.py", line 93, in send
+    send_handler(record)
+  File "/home1/quanquan/miniconda3/envs/py3/lib/python3.6/site-packages/wandb/internal/sender.py", line 356, in send_run
+    commit=repo.last_commit,
+  File "/home1/quanquan/miniconda3/envs/py3/lib/python3.6/site-packages/wandb/apis/normalize.py", line 57, in wrapper
+    message, err), sys.exc_info()[2])
+  File "/home1/quanquan/miniconda3/envs/py3/lib/python3.6/site-packages/six.py", line 702, in reraise
+    raise value.with_traceback(tb)
+  File "/home1/quanquan/miniconda3/envs/py3/lib/python3.6/site-packages/wandb/apis/normalize.py", line 25, in wrapper
+    return func(*args, **kwargs)
+  File "/home1/quanquan/miniconda3/envs/py3/lib/python3.6/site-packages/wandb/internal/internal_api.py", line 839, in upsert_run
+    mutation, variable_values=variable_values, **kwargs)
+  File "/home1/quanquan/miniconda3/envs/py3/lib/python3.6/site-packages/wandb/old/retry.py", line 105, in __call__
+    if not check_retry_fn(e):
+  File "/home1/quanquan/miniconda3/envs/py3/lib/python3.6/site-packages/wandb/util.py", line 574, in no_retry_auth
+    raise CommError("Permission denied, ask the project owner to grant you access")
+wandb.errors.error.CommError: Permission denied, ask the project owner to grant you access
+2021-01-18 22:11:00,855 INFO    MainThread:16129 [internal.py:handle_exit():137] Internal process exited

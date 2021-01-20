@@ -24,3 +24,5 @@ output*
 *.pkl
 
 */wandb/*
+*/output_test/*
+*/output/*

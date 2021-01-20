@@ -17,7 +17,6 @@ def test1():
     reader = sitk.ImageSeriesReader()
     dicom_names = reader.GetGDCMSeriesFileNames(dicom_path)
     reader.SetFileNames(dicom_names)
-    
     dicom_image = reader.Execute()
     dicom_np = sitk.GetArrayFromImage(dicom_image)  # numpy
     
@@ -28,32 +27,21 @@ def test1():
     print("max {}, min {}, avg {} ".format(np.max(dicom_slice), np.min(dicom_slice), np.average(dicom_slice)))
     pimage = (dicom_np[i,:,:]).astype(np.uint8)
     cv2.imwrite(tfilename("output_test/sitk_201_1_dicom_p{}.jpg".format(i)), pimage)
-    
-    # for k in image.GetMetaDataKeys():
-    #     v = image.GetMetaData(k)
-    #     print("({0}) = = \"{1}\"".format(k, v))
-    
-    
-    # img = nib.load(example_filename)
-    
+
     # ----------------------  Read Nrrd -----------------------------
     print("Image NRRD! ")
     inputImageFileName = "/home1/quanquan/datasets/lsw/benign_65/fpAML_55/201_1.nrrd"
     
     reader = sitk.ImageFileReader()
-    reader.SetImageIO("NrrdImageIO")
+    reader.SetImageIO("NrrdImageIO") # NiftiImageIO
+    # reader.SetImageIO("JPEGImageIO") #PNGImageIO
     reader.SetFileName(inputImageFileName)
     nrrd_image = reader.Execute()
-    
-    # print(nrrd_image)
     
     # writer = sitk.ImageFileWriter()
     # writer.SetFileName(outputImageFileName)
     # writer.Execute(image)
     
-    # image_3D = sitk.Image(256, 128, 64, sitk.sitkInt16)
-    # image_2D = sitk.Image(64, 64, sitk.sitkFloat32)
-    # image_2D = sitk.Image([32,32], sitk.sitkUInt32)
     image_RGB = sitk.Image([128,64], sitk.sitkVectorUInt8, 3)
 
     # cv2.imwrite(image_RGB, tfilename("output_test/sitk_201_1.jpg"))
@@ -71,9 +59,6 @@ def test1():
 def test2():
     print("Image NRRD! ")
     # inputImageFileName = "/home1/quanquan/datasets/lsw/benign_65/fpAML_55/201_1.nrrd"
-    # input_dir1 = "E:/Documents/Quanquan-20200917/screencopy/43116392_screencopy/Dynamic_c"
-    # input_dir2 = "E:/Documents/Quanquan-20200917/screencopy/43116392_screencopy/T1_C"
-    input_dir1 = "/home1/quanquan/datasets/screencopy/43116392_screencopy/T1_C"
     
     image_names = np.array([x.name for x in os.scandir(input_dir1) if (x.name.endswith(".JPG") or x.name.endswith(".jpg"))])
     print(image_names)

@@ -1,0 +1,161 @@
+2021-01-18 22:38:01,300 INFO    MainThread:11742 [wandb_init.py:_log_setup():307] Logging user logs to wandb/run-20210118_223801-2s21o9np/logs/debug.log
+2021-01-18 22:38:01,300 INFO    MainThread:11742 [wandb_init.py:_log_setup():308] Logging internal logs to wandb/run-20210118_223801-2s21o9np/logs/debug-internal.log
+2021-01-18 22:38:01,300 INFO    MainThread:11742 [wandb_setup.py:_flush():68] setting env: {}
+2021-01-18 22:38:01,300 INFO    MainThread:11742 [wandb_setup.py:_flush():68] setting user settings: {}
+2021-01-18 22:38:01,300 INFO    MainThread:11742 [wandb_setup.py:_flush():68] multiprocessing start_methods=fork,spawn,forkserver
+2021-01-18 22:38:01,300 WARNING MainThread:11742 [wandb_setup.py:_flush():68] Ignoring settings passed to wandb.setup() which has already been configured.
+2021-01-18 22:38:01,326 WARNING MainThread:11742 [wandb_setup.py:__init__():209] Ignoring settings passed to wandb.setup() which has already been configured.
+2021-01-18 22:38:07,850 INFO    MainThread:11742 [wandb_run.py:_console_start():1103] atexit reg
+2021-01-18 22:38:07,850 INFO    MainThread:11742 [wandb_run.py:_redirect():978] redirect: SettingsConsole.REDIRECT
+2021-01-18 22:38:07,853 INFO    MainThread:11742 [wandb_run.py:_redirect():981] Redirecting console.
+2021-01-18 22:38:07,854 INFO    MainThread:11742 [redirect.py:install():187] install start
+2021-01-18 22:38:07,854 INFO    MainThread:11742 [redirect.py:install():202] install stop
+2021-01-18 22:38:07,854 INFO    MainThread:11742 [redirect.py:install():187] install start
+2021-01-18 22:38:07,855 INFO    MainThread:11742 [redirect.py:install():202] install stop
+2021-01-18 22:38:07,855 INFO    MainThread:11742 [wandb_run.py:_redirect():1025] Redirects installed.
+2021-01-18 22:38:07,855 INFO    MainThread:11742 [wandb_config.py:__setitem__():58] config set output_dir = . - <bound method Run._config_callback of <wandb.sdk.wandb_run.Run object at 0x7f15069fd198>>
+2021-01-18 22:38:07,855 INFO    MainThread:11742 [wandb_run.py:_config_callback():506] config_cb output_dir . {'_wandb': {'cli_version': '0.10.1', 'python_version': '3.6.10', 'is_jupyter_run': False, 'is_kaggle_kernel': False, 'framework': 'torch'}, 'output_dir': '.'}
+2021-01-18 22:38:07,856 INFO    MainThread:11742 [wandb_config.py:__setitem__():58] config set modelname = IPT - <bound method Run._config_callback of <wandb.sdk.wandb_run.Run object at 0x7f15069fd198>>
+2021-01-18 22:38:07,856 INFO    MainThread:11742 [wandb_run.py:_config_callback():506] config_cb modelname IPT {'_wandb': {'cli_version': '0.10.1', 'python_version': '3.6.10', 'is_jupyter_run': False, 'is_kaggle_kernel': False, 'framework': 'torch'}, 'output_dir': '.', 'modelname': 'IPT'}
+2021-01-18 22:38:07,857 INFO    MainThread:11742 [wandb_config.py:__setitem__():58] config set lr = 0.0001 - <bound method Run._config_callback of <wandb.sdk.wandb_run.Run object at 0x7f15069fd198>>
+2021-01-18 22:38:07,857 INFO    MainThread:11742 [wandb_run.py:_config_callback():506] config_cb lr 0.0001 {'_wandb': {'cli_version': '0.10.1', 'python_version': '3.6.10', 'is_jupyter_run': False, 'is_kaggle_kernel': False, 'framework': 'torch'}, 'output_dir': '.', 'modelname': 'IPT', 'lr': 0.0001}
+2021-01-18 22:38:07,858 INFO    MainThread:11742 [wandb_config.py:__setitem__():58] config set weight_decay = 0.0001 - <bound method Run._config_callback of <wandb.sdk.wandb_run.Run object at 0x7f15069fd198>>
+2021-01-18 22:38:07,858 INFO    MainThread:11742 [wandb_run.py:_config_callback():506] config_cb weight_decay 0.0001 {'_wandb': {'cli_version': '0.10.1', 'python_version': '3.6.10', 'is_jupyter_run': False, 'is_kaggle_kernel': False, 'framework': 'torch'}, 'output_dir': '.', 'modelname': 'IPT', 'lr': 0.0001, 'weight_decay': 0.0001}
+2021-01-18 22:38:07,859 INFO    MainThread:11742 [wandb_config.py:__setitem__():58] config set batch_size = 2 - <bound method Run._config_callback of <wandb.sdk.wandb_run.Run object at 0x7f15069fd198>>
+2021-01-18 22:38:07,859 INFO    MainThread:11742 [wandb_run.py:_config_callback():506] config_cb batch_size 2 {'_wandb': {'cli_version': '0.10.1', 'python_version': '3.6.10', 'is_jupyter_run': False, 'is_kaggle_kernel': False, 'framework': 'torch'}, 'output_dir': '.', 'modelname': 'IPT', 'lr': 0.0001, 'weight_decay': 0.0001, 'batch_size': 2}
+2021-01-18 22:38:07,860 INFO    MainThread:11742 [wandb_config.py:__setitem__():58] config set epochs = 300 - <bound method Run._config_callback of <wandb.sdk.wandb_run.Run object at 0x7f15069fd198>>
+2021-01-18 22:38:07,860 INFO    MainThread:11742 [wandb_run.py:_config_callback():506] config_cb epochs 300 {'_wandb': {'cli_version': '0.10.1', 'python_version': '3.6.10', 'is_jupyter_run': False, 'is_kaggle_kernel': False, 'framework': 'torch'}, 'output_dir': '.', 'modelname': 'IPT', 'lr': 0.0001, 'weight_decay': 0.0001, 'batch_size': 2, 'epochs': 300}
+2021-01-18 22:38:07,861 INFO    MainThread:11742 [wandb_config.py:__setitem__():58] config set lr_drop = 0.85 - <bound method Run._config_callback of <wandb.sdk.wandb_run.Run object at 0x7f15069fd198>>
+2021-01-18 22:38:07,861 INFO    MainThread:11742 [wandb_run.py:_config_callback():506] config_cb lr_drop 0.85 {'_wandb': {'cli_version': '0.10.1', 'python_version': '3.6.10', 'is_jupyter_run': False, 'is_kaggle_kernel': False, 'framework': 'torch'}, 'output_dir': '.', 'modelname': 'IPT', 'lr': 0.0001, 'weight_decay': 0.0001, 'batch_size': 2, 'epochs': 300, 'lr_drop': 0.85}
+2021-01-18 22:38:07,862 INFO    MainThread:11742 [wandb_config.py:__setitem__():58] config set enc_layers = 6 - <bound method Run._config_callback of <wandb.sdk.wandb_run.Run object at 0x7f15069fd198>>
+2021-01-18 22:38:07,862 INFO    MainThread:11742 [wandb_run.py:_config_callback():506] config_cb enc_layers 6 {'_wandb': {'cli_version': '0.10.1', 'python_version': '3.6.10', 'is_jupyter_run': False, 'is_kaggle_kernel': False, 'framework': 'torch'}, 'output_dir': '.', 'modelname': 'IPT', 'lr': 0.0001, 'weight_decay': 0.0001, 'batch_size': 2, 'epochs': 300, 'lr_drop': 0.85, 'enc_layers': 6}
+2021-01-18 22:38:07,862 INFO    MainThread:11742 [wandb_config.py:__setitem__():58] config set dec_layers = 6 - <bound method Run._config_callback of <wandb.sdk.wandb_run.Run object at 0x7f15069fd198>>
+2021-01-18 22:38:07,863 INFO    MainThread:11742 [wandb_run.py:_config_callback():506] config_cb dec_layers 6 {'_wandb': {'cli_version': '0.10.1', 'python_version': '3.6.10', 'is_jupyter_run': False, 'is_kaggle_kernel': False, 'framework': 'torch'}, 'output_dir': '.', 'modelname': 'IPT', 'lr': 0.0001, 'weight_decay': 0.0001, 'batch_size': 2, 'epochs': 300, 'lr_drop': 0.85, 'enc_layers': 6, 'dec_layers': 6}
+2021-01-18 22:38:07,863 INFO    MainThread:11742 [wandb_config.py:__setitem__():58] config set dim_feedforward = 1024 - <bound method Run._config_callback of <wandb.sdk.wandb_run.Run object at 0x7f15069fd198>>
+2021-01-18 22:38:07,863 INFO    MainThread:11742 [wandb_run.py:_config_callback():506] config_cb dim_feedforward 1024 {'_wandb': {'cli_version': '0.10.1', 'python_version': '3.6.10', 'is_jupyter_run': False, 'is_kaggle_kernel': False, 'framework': 'torch'}, 'output_dir': '.', 'modelname': 'IPT', 'lr': 0.0001, 'weight_decay': 0.0001, 'batch_size': 2, 'epochs': 300, 'lr_drop': 0.85, 'enc_layers': 6, 'dec_layers': 6, 'dim_feedforward': 1024}
+2021-01-18 22:38:07,864 INFO    MainThread:11742 [wandb_config.py:__setitem__():58] config set hidden_dim = 256 - <bound method Run._config_callback of <wandb.sdk.wandb_run.Run object at 0x7f15069fd198>>
+2021-01-18 22:38:07,864 INFO    MainThread:11742 [wandb_run.py:_config_callback():506] config_cb hidden_dim 256 {'_wandb': {'cli_version': '0.10.1', 'python_version': '3.6.10', 'is_jupyter_run': False, 'is_kaggle_kernel': False, 'framework': 'torch'}, 'output_dir': '.', 'modelname': 'IPT', 'lr': 0.0001, 'weight_decay': 0.0001, 'batch_size': 2, 'epochs': 300, 'lr_drop': 0.85, 'enc_layers': 6, 'dec_layers': 6, 'dim_feedforward': 1024, 'hidden_dim': 256}
+2021-01-18 22:38:07,865 INFO    MainThread:11742 [wandb_config.py:__setitem__():58] config set dropout = 0.1 - <bound method Run._config_callback of <wandb.sdk.wandb_run.Run object at 0x7f15069fd198>>
+2021-01-18 22:38:07,865 INFO    MainThread:11742 [wandb_run.py:_config_callback():506] config_cb dropout 0.1 {'_wandb': {'cli_version': '0.10.1', 'python_version': '3.6.10', 'is_jupyter_run': False, 'is_kaggle_kernel': False, 'framework': 'torch'}, 'output_dir': '.', 'modelname': 'IPT', 'lr': 0.0001, 'weight_decay': 0.0001, 'batch_size': 2, 'epochs': 300, 'lr_drop': 0.85, 'enc_layers': 6, 'dec_layers': 6, 'dim_feedforward': 1024, 'hidden_dim': 256, 'dropout': 0.1}
+2021-01-18 22:38:07,866 INFO    MainThread:11742 [wandb_config.py:__setitem__():58] config set nheads = 8 - <bound method Run._config_callback of <wandb.sdk.wandb_run.Run object at 0x7f15069fd198>>
+2021-01-18 22:38:07,866 INFO    MainThread:11742 [wandb_run.py:_config_callback():506] config_cb nheads 8 {'_wandb': {'cli_version': '0.10.1', 'python_version': '3.6.10', 'is_jupyter_run': False, 'is_kaggle_kernel': False, 'framework': 'torch'}, 'output_dir': '.', 'modelname': 'IPT', 'lr': 0.0001, 'weight_decay': 0.0001, 'batch_size': 2, 'epochs': 300, 'lr_drop': 0.85, 'enc_layers': 6, 'dec_layers': 6, 'dim_feedforward': 1024, 'hidden_dim': 256, 'dropout': 0.1, 'nheads': 8}
+2021-01-18 22:38:07,867 INFO    MainThread:11742 [wandb_config.py:__setitem__():58] config set num_queries = 100 - <bound method Run._config_callback of <wandb.sdk.wandb_run.Run object at 0x7f15069fd198>>
+2021-01-18 22:38:07,867 INFO    MainThread:11742 [wandb_run.py:_config_callback():506] config_cb num_queries 100 {'_wandb': {'cli_version': '0.10.1', 'python_version': '3.6.10', 'is_jupyter_run': False, 'is_kaggle_kernel': False, 'framework': 'torch'}, 'output_dir': '.', 'modelname': 'IPT', 'lr': 0.0001, 'weight_decay': 0.0001, 'batch_size': 2, 'epochs': 300, 'lr_drop': 0.85, 'enc_layers': 6, 'dec_layers': 6, 'dim_feedforward': 1024, 'hidden_dim': 256, 'dropout': 0.1, 'nheads': 8, 'num_queries': 100}
+2021-01-18 22:38:07,867 INFO    MainThread:11742 [wandb_config.py:__setitem__():58] config set pre_norm = False - <bound method Run._config_callback of <wandb.sdk.wandb_run.Run object at 0x7f15069fd198>>
+2021-01-18 22:38:07,868 INFO    MainThread:11742 [wandb_run.py:_config_callback():506] config_cb pre_norm False {'_wandb': {'cli_version': '0.10.1', 'python_version': '3.6.10', 'is_jupyter_run': False, 'is_kaggle_kernel': False, 'framework': 'torch'}, 'output_dir': '.', 'modelname': 'IPT', 'lr': 0.0001, 'weight_decay': 0.0001, 'batch_size': 2, 'epochs': 300, 'lr_drop': 0.85, 'enc_layers': 6, 'dec_layers': 6, 'dim_feedforward': 1024, 'hidden_dim': 256, 'dropout': 0.1, 'nheads': 8, 'num_queries': 100, 'pre_norm': False}
+2021-01-18 22:38:07,868 INFO    MainThread:11742 [wandb_config.py:__setitem__():58] config set log_interval = 10 - <bound method Run._config_callback of <wandb.sdk.wandb_run.Run object at 0x7f15069fd198>>
+2021-01-18 22:38:07,868 INFO    MainThread:11742 [wandb_run.py:_config_callback():506] config_cb log_interval 10 {'_wandb': {'cli_version': '0.10.1', 'python_version': '3.6.10', 'is_jupyter_run': False, 'is_kaggle_kernel': False, 'framework': 'torch'}, 'output_dir': '.', 'modelname': 'IPT', 'lr': 0.0001, 'weight_decay': 0.0001, 'batch_size': 2, 'epochs': 300, 'lr_drop': 0.85, 'enc_layers': 6, 'dec_layers': 6, 'dim_feedforward': 1024, 'hidden_dim': 256, 'dropout': 0.1, 'nheads': 8, 'num_queries': 100, 'pre_norm': False, 'log_interval': 10}
+2021-01-18 22:38:12,967 INFO    MainThread:11742 [wandb_run.py:_atexit_cleanup():1081] got exitcode: 1
+2021-01-18 22:38:12,968 INFO    MainThread:11742 [wandb_run.py:_restore():1053] restore
+2021-01-18 22:38:12,969 INFO    MainThread:11742 [redirect.py:uninstall():206] uninstall start
+2021-01-18 22:38:12,970 INFO    MainThread:11742 [redirect.py:_stop():255] _stop: stdout
+2021-01-18 22:38:12,973 INFO    stdout    :11742 [redirect.py:_pipe_relay():113] relay done saw last write: stdout
+2021-01-18 22:38:12,973 INFO    MainThread:11742 [redirect.py:_stop():261] _stop closed: stdout
+2021-01-18 22:38:12,973 INFO    stdout    :11742 [redirect.py:_pipe_relay():129] relay done done: stdout
+2021-01-18 22:38:12,974 INFO    MainThread:11742 [redirect.py:_stop():267] _stop joined: stdout
+2021-01-18 22:38:12,974 INFO    MainThread:11742 [redirect.py:_stop():269] _stop rd closed: stdout
+2021-01-18 22:38:12,974 INFO    MainThread:11742 [redirect.py:uninstall():210] uninstall done
+2021-01-18 22:38:12,974 INFO    MainThread:11742 [redirect.py:uninstall():206] uninstall start
+2021-01-18 22:38:12,974 INFO    MainThread:11742 [redirect.py:_stop():255] _stop: stderr
+2021-01-18 22:38:12,974 INFO    MainThread:11742 [redirect.py:_stop():261] _stop closed: stderr
+2021-01-18 22:38:12,974 INFO    stderr    :11742 [redirect.py:_pipe_relay():113] relay done saw last write: stderr
+2021-01-18 22:38:12,975 INFO    stderr    :11742 [redirect.py:_pipe_relay():129] relay done done: stderr
+2021-01-18 22:38:12,975 INFO    MainThread:11742 [redirect.py:_stop():267] _stop joined: stderr
+2021-01-18 22:38:12,975 INFO    MainThread:11742 [redirect.py:_stop():269] _stop rd closed: stderr
+2021-01-18 22:38:12,975 INFO    MainThread:11742 [redirect.py:uninstall():210] uninstall done
+2021-01-18 22:38:25,779 INFO    MainThread:11742 [wandb_run.py:_wait_for_finish():1185] got exit ret: uuid: "daf5088af35249cfa07cbb732750c960"
+response {
+  poll_exit_response {
+    file_counts {
+      wandb_count: 1
+    }
+    pusher_stats {
+      uploaded_bytes: 754
+      total_bytes: 754
+    }
+  }
+}
+
+2021-01-18 22:38:27,784 INFO    MainThread:11742 [wandb_run.py:_wait_for_finish():1185] got exit ret: uuid: "cd413f2acf8f477fa696ef769bb97e18"
+response {
+  poll_exit_response {
+    file_counts {
+      wandb_count: 5
+    }
+    pusher_stats {
+      uploaded_bytes: 1394
+      total_bytes: 5545
+    }
+  }
+}
+
+2021-01-18 22:38:29,788 INFO    MainThread:11742 [wandb_run.py:_wait_for_finish():1185] got exit ret: uuid: "36f4dc5c04344f94b87794dc694bbced"
+response {
+  poll_exit_response {
+    file_counts {
+      wandb_count: 5
+    }
+    pusher_stats {
+      uploaded_bytes: 4779
+      total_bytes: 5545
+    }
+  }
+}
+
+2021-01-18 22:38:31,793 INFO    MainThread:11742 [wandb_run.py:_wait_for_finish():1185] got exit ret: uuid: "702b484b7a7d4ffbb591c2d8f983ce59"
+response {
+  poll_exit_response {
+    file_counts {
+      wandb_count: 5
+    }
+    pusher_stats {
+      uploaded_bytes: 4779
+      total_bytes: 5545
+    }
+  }
+}
+
+2021-01-18 22:38:33,798 INFO    MainThread:11742 [wandb_run.py:_wait_for_finish():1185] got exit ret: uuid: "feb125a17584409b9b0390c3b61c2503"
+response {
+  poll_exit_response {
+    file_counts {
+      wandb_count: 5
+    }
+    pusher_stats {
+      uploaded_bytes: 4779
+      total_bytes: 5545
+    }
+  }
+}
+
+2021-01-18 22:38:35,803 INFO    MainThread:11742 [wandb_run.py:_wait_for_finish():1185] got exit ret: uuid: "f2ca329b6e5a4cd291f8105261cf0d64"
+response {
+  poll_exit_response {
+    file_counts {
+      wandb_count: 5
+    }
+    pusher_stats {
+      uploaded_bytes: 4779
+      total_bytes: 5545
+    }
+  }
+}
+
+2021-01-18 22:38:37,808 INFO    MainThread:11742 [wandb_run.py:_wait_for_finish():1185] got exit ret: uuid: "57967473b54e4b0b8c6db442bf065f38"
+response {
+  poll_exit_response {
+    done: true
+    exit_result {
+    }
+    file_counts {
+      wandb_count: 5
+    }
+    pusher_stats {
+      uploaded_bytes: 5545
+      total_bytes: 5545
+    }
+  }
+}
+
+2021-01-18 22:38:38,909 INFO    MainThread:11742 [wandb_run.py:_show_files():1332] logging synced files
+2021-01-18 22:38:38,910 INFO    MainThread:11742 [internal.py:handle_exit():137] Internal process exited

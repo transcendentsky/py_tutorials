@@ -5,6 +5,6 @@ setup(
     version="1.0",
     author="trans",
     author_email="transcendentsiki@gmail.com",
-    py_modules=['tutils'],
-    packages=find_packages(),
+    packages=find_packages()
 )
+# py_modules=['tutils'],

@@ -79,7 +79,7 @@ def time_now():
     tt()
     return time.strftime("%Y%m%d-%H%M%S", time.localtime())
 
-def generate_random_str(n):
+def generate_random_str(n:int=6):
     tt()
     ran_str = ''.join(random.sample(string.ascii_letters + string.digits, n))
     return ran_str
