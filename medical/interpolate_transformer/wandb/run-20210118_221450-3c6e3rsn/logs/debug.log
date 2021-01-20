@@ -1,8 +1,0 @@
-2021-01-18 22:14:50,290 INFO    MainThread:21992 [wandb_init.py:_log_setup():307] Logging user logs to wandb/run-20210118_221450-3c6e3rsn/logs/debug.log
-2021-01-18 22:14:50,291 INFO    MainThread:21992 [wandb_init.py:_log_setup():308] Logging internal logs to wandb/run-20210118_221450-3c6e3rsn/logs/debug-internal.log
-2021-01-18 22:14:50,291 INFO    MainThread:21992 [wandb_setup.py:_flush():68] setting env: {}
-2021-01-18 22:14:50,291 INFO    MainThread:21992 [wandb_setup.py:_flush():68] setting user settings: {}
-2021-01-18 22:14:50,291 INFO    MainThread:21992 [wandb_setup.py:_flush():68] multiprocessing start_methods=fork,spawn,forkserver
-2021-01-18 22:14:50,291 WARNING MainThread:21992 [wandb_setup.py:_flush():68] Ignoring settings passed to wandb.setup() which has already been configured.
-2021-01-18 22:14:50,323 WARNING MainThread:21992 [wandb_setup.py:__init__():209] Ignoring settings passed to wandb.setup() which has already been configured.
-2021-01-18 22:15:33,667 INFO    MainThread:21992 [wandb_init.py:teardown():169] tearing down wandb.init
